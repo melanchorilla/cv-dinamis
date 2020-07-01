@@ -1,1 +1,1 @@
-# cv-dinamis
+# cv-dinamis oleh sang cahaya
