@@ -6,7 +6,7 @@
 *
 * @author Colorlib
 * @support <https://github.com/ColorlibHQ/AdminLTE/issues>
-* @version 2.4.17
+* @version 2.4.15
 * @repository git://github.com/ColorlibHQ/AdminLTE.git
 * @license MIT <http://opensource.org/licenses/MIT>
 */
@@ -329,7 +329,7 @@ throw new Error('AdminLTE requires jQuery')
   var DataKey = 'lte.controlsidebar';
 
   var Default = {
-    controlsidebarSlide: true
+    slide: true
   };
 
   var Selector = {
@@ -343,8 +343,7 @@ throw new Error('AdminLTE requires jQuery')
   };
 
   var ClassName = {
-    open: 'control-sidebar-open',
-    transition: 'control-sidebar-hold-transition',
+    open : 'control-sidebar-open',
     fixed: 'fixed'
   };
 
@@ -390,11 +389,8 @@ throw new Error('AdminLTE requires jQuery')
 
   ControlSidebar.prototype.expand = function () {
     $(Selector.sidebar).show();
-    if (!this.options.controlsidebarSlide) {
-      $('body').addClass(ClassName.transition).addClass(ClassName.open).delay(50).queue(function(){
-        $('body').removeClass(ClassName.transition);
-        $(this).dequeue()
-      })
+    if (!this.options.slide) {
+      $('body').addClass(ClassName.open);
     } else {
       $(Selector.sidebar).addClass(ClassName.open);
     }
@@ -404,14 +400,7 @@ throw new Error('AdminLTE requires jQuery')
   };
 
   ControlSidebar.prototype.collapse = function () {
-    if (!this.options.controlsidebarSlide) {
-      $('body').addClass(ClassName.transition).removeClass(ClassName.open).delay(50).queue(function(){
-        $('body').removeClass(ClassName.transition);
-        $(this).dequeue()
-      })
-    } else {
-      $(Selector.sidebar).removeClass(ClassName.open);
-    }
+    $('body, ' + Selector.sidebar).removeClass(ClassName.open);
     $(Selector.sidebar).fadeOut();
     $(this.element).trigger($.Event(Event.collapsed));
   };
