@@ -35,8 +35,16 @@
      <li class="{{ (Request::path() == 'admin/manage-pendidikan') ? 'active' : '' }}"><a href="{{ url('admin/manage-pendidikan') }}"><i class="fa fa-bed fa-fw"></i><span> Manage Pendidikan</span></a></li>
  
     <li class="header">OTHER</li>
-    <li><a href="{{ url('/keluar') }}"><i class="glyphicon glyphicon-log-out fa-fw"></i><span> Logout</span></a></li>
+    <li>
+      <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                <i class="glyphicon glyphicon-log-out fa-fw"></i><span> Logout</span>
+        </a>
+    </li>
  
  
   </ul>
+  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      @csrf
+  </form>
 </section>
